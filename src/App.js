@@ -5,15 +5,22 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: "John Doe",
+      name: [{name: "John Doe"}],
       image: "",
-      short: "I am a hardworking work-a-holic",
-      contactInfo: [{address: "Helmdeep"}, {phone: 123},
-                    {email: "email@mail.com"}, {online: "Linkedin: ABC"}],
-      education: [{institution: "Harvard", enrollment:"2019",
-                   graduation: "2020", title: "MA in BA"}],
-      work: [{workplace: "Starbucks", responsibilites: "Coffee Making"}],
-      skills: [{name: "Programming", description: "Really proficient"}]
+      short: [{intro: "I am a workaholic"}],
+      contacts: [{type: "Phone", value: 123}],
+      education: [{name: "Harvard", enrollment:"2019",
+                   graduation: "2020", title: "MA in BA", descr: "I learned this, that"}],
+      jobs: [{employer: "Starbucks", title: "Barista",
+              descr: "I did this and that", start: "2020", end: "2021"}],
+      skills: [{name: "Programming", descr: "Really proficient"}],
+
+      edit: {
+        editValue: undefined,
+        stateToChange: undefined,
+        indexToChange: undefined,
+        keyToChange: undefined,
+      }
     }
 
     this.addTo = this.addTo.bind(this);
