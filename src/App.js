@@ -1,5 +1,12 @@
 import './App.css';
 import { Component } from 'react';
+import Name from './components/name'
+import ProfilePic from './components/profile-pic'
+import ShortDescription from './components/short-description'
+import Contacts from './components/contacts'
+import Education from './components/education'
+import Work from './components/work'
+import Skills from './components/skills'
 
 class App extends Component {
   constructor(props) {
@@ -22,31 +29,18 @@ class App extends Component {
         keyToChange: undefined,
       }
     }
-
-    this.addTo = this.addTo.bind(this);
-    this.removeFrom = this.removeFrom.bind(this);
-    this.update = this.update.bind(this);
+    //this.update = this.update.bind(this);
   }
-
-  addTo(prop, value) {
-    let list = this.state[prop];
-    this.setState({[prop]: list.concat(value)})
-  }
-
-  removeFrom(prop, thisIndex){
-    let list = this.state[prop];
-    list.splice(thisIndex, 1);
-    this.setState({[prop]: list});
-  }
-
-  update(prop, value) {
-    this.setState({[prop]: value});
-  }
-
   render() {
     return (
       <div className="App">
-        <h1>Hello world</h1>
+        <Name name={this.state.name}></Name>
+        <ProfilePic url={this.state.image}></ProfilePic>
+        <ShortDescription short={this.state.short}></ShortDescription>
+        <Contacts contacts={this.state.contacts}></Contacts>
+        <Education education={this.state.education}></Education>
+        <Work jobs={this.state.jobs}></Work>
+        <Skills skills={this.state.skills}></Skills>
       </div>
     );
   }
