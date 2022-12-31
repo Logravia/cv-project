@@ -16,17 +16,17 @@ class App extends Component {
       image: "",
       short: [{intro: "I am a workaholic"}],
       contacts: [{type: "Phone", value: 123}],
-      education: [{name: "Harvard", enrollment:"2019",
+       education: [{name: "Harvard", enrollment:"2019",
                    graduation: "2020", title: "MA in BA", descr: "I learned this, that"}],
       jobs: [{employer: "Starbucks", title: "Barista",
-              descr: "I did this and that", start: "2020", end: "2021"}],
-      skills: [{name: "Programming", descr: "Really proficient"}],
-
+                   graduation: "2bucks", title: "Barista",
+               descr: "I did this and that", start: "2020", end: "2021"}],
+       skills: [{name: "Programming", descr: "Really proficient"}],
       edit: {
-        editValue: undefined,
-        stateToChange: undefined,
-        indexToChange: undefined,
-        keyToChange: undefined,
+        value: undefined,
+        state: "name",
+        index: 0,
+        key: "name",
       }
     }
     //this.update = this.update.bind(this);
@@ -34,13 +34,13 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Name name={this.state.name}></Name>
-        <ProfilePic url={this.state.image}></ProfilePic>
-        <ShortDescription short={this.state.short}></ShortDescription>
-        <Contacts contacts={this.state.contacts}></Contacts>
-        <Education education={this.state.education}></Education>
-        <Work jobs={this.state.jobs}></Work>
-        <Skills skills={this.state.skills}></Skills>
+        <Name name={this.state.name} edit={this.state.edit}></Name>
+        <ProfilePic url={this.state.image} edit={this.state.edit}></ProfilePic>
+        <ShortDescription short={this.state.short} edit={this.state.edit}></ShortDescription>
+        <Contacts contacts={this.state.contacts} edit={this.state.edit}></Contacts>
+        <Education education={this.state.education} edit={this.state.edit}></Education>
+        <Work jobs={this.state.jobs} edit={this.state.edit}></Work>
+        <Skills skills={this.state.skills} edit={this.state.edit}></Skills>
       </div>
     );
   }

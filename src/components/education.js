@@ -4,7 +4,7 @@ import createDataContainer from "./helper.js"
 class Education extends Component {
   render() {
     return (
-      createDataContainer(this.props.education, "education")
+      createDataContainer(this.props.education, "education", this.props.edit)
     );
   }
 }
