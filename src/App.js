@@ -1,46 +1,99 @@
-import './App.css';
 import { Component } from 'react';
-import Name from './components/name'
-import ProfilePic from './components/profile-pic'
-import ShortDescription from './components/short-description'
-import Contacts from './components/contacts'
-import Education from './components/education'
-import Work from './components/work'
-import Skills from './components/skills'
+import './App.css';
+import Contacts from './components/contacts';
+import Education from './components/education';
+import Name from './components/name';
+import ProfilePic from './components/profile-pic';
+import Description from './components/description';
+import Skills from './components/skills';
+import Jobs from './components/jobs';
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
       name: [{name: "John Doe"}],
-      image: "",
-      short: [{intro: "I am a workaholic"}],
+      imgUrl: "",
+      description: [{intro: "I am a workaholic"}],
       contacts: [{type: "Phone", value: 123}],
        education: [{name: "Harvard", enrollment:"2019",
                    graduation: "2020", title: "MA in BA", descr: "I learned this, that"}],
       jobs: [{employer: "Starbucks", title: "Barista",
-                   graduation: "2bucks", title: "Barista",
+                   graduation: "2bucks",
                descr: "I did this and that", start: "2020", end: "2021"}],
        skills: [{name: "Programming", descr: "Really proficient"}],
       edit: {
         value: undefined,
-        state: "name",
-        index: 0,
-        key: "name",
+        state: undefined,
+        index: undefined,
+        key:   undefined,
       }
     }
-    //this.update = this.update.bind(this);
+    this.noteEdit = this.noteEdit.bind(this);
+    this.clearEdit = this.clearEdit.bind(this);
+    this.saveEdit = this.saveEdit.bind(this);
+    this.elementToEdit = this.elementToEdit.bind(this);
+    this.updateEditVal = this.updateEditVal.bind(this);
+
+    this.editTools = {noteEdit: this.noteEdit,
+                      updateEditVal: this.updateEditVal,
+                      elementToEdit: this.elementToEdit}
   }
+
+  noteEdit(e) {
+    e.stopPropagation();
+    let el = e.currentTarget;
+    let value = el.textContent;
+    let key = el.parentElement.dataset.key;
+    let index = Number(el.parentElement.parentElement.dataset.index);
+    let state = el.parentElement.parentElement.parentElement.dataset.state;
+
+    this.setState({edit: {value, key, index, state}})
+    console.log("NOTED EDIT")
+  }
+
+  clearEdit() {
+    this.setState({edit: {}});
+    console.log("CLEARED EDIT")
+  }
+
+  saveEdit(e){
+    if (!this.state.edit.state) { return }
+    if (e.target.className === "editing")  {return}
+
+    let {value, state, index, key} = this.state.edit;
+    let currentList = this.state[state];
+    currentList[index][key] = value
+    this.setState({state: currentList})
+    console.log("SAVED EDIT")
+    this.clearEdit();
+  }
+
+  updateEditVal(e){
+    e.stopPropagation();
+    console.log(e);
+    let val = e.target.value;
+    let edit = this.state.edit
+    edit.value = val
+    this.setState({edit: edit});
+    console.log("UPDATED EDIT VALUE")
+  }
+
+  elementToEdit(name, index, key) {
+    let edit = this.state.edit;
+    return (edit.key === key && edit.state === name && edit.index === index)
+  }
+
   render() {
     return (
-      <div className="App">
-        <Name name={this.state.name} edit={this.state.edit}></Name>
-        <ProfilePic url={this.state.image} edit={this.state.edit}></ProfilePic>
-        <ShortDescription short={this.state.short} edit={this.state.edit}></ShortDescription>
-        <Contacts contacts={this.state.contacts} edit={this.state.edit}></Contacts>
-        <Education education={this.state.education} edit={this.state.edit}></Education>
-        <Work jobs={this.state.jobs} edit={this.state.edit}></Work>
-        <Skills skills={this.state.skills} edit={this.state.edit}></Skills>
+      <div className="App" onClick={this.saveEdit}>
+        <Name data={this.state.name} editTools={this.editTools}/>
+        <ProfilePic url={this.state.imgUrl}/>
+        <Description data={this.state.description} editTools={this.editTools}/>
+        <Contacts data={this.state.contacts} editTools={this.editTools}/>
+        <Education data={this.state.education} editTools={this.editTools}/>
+        <Jobs data={this.state.jobs} editTools={this.editTools}/>
+        <Skills data={this.state.skills} editTools={this.editTools}/>
       </div>
     );
   }
