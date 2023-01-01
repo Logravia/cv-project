@@ -1,10 +1,10 @@
 import { Component } from "react";
-import createDataContainer from "./helper.js"
+import DataContainer from "./data-container";
 
 class Education extends Component {
   render() {
     return (
-      createDataContainer(this.props.education, "education", this.props.edit)
+      <DataContainer name="education" data={this.props.data} editTools={this.props.editTools}/>
     );
   }
 }
