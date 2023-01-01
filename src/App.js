@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import './App.css';
+
 import Contacts from './components/contacts';
 import Education from './components/education';
 import Name from './components/name';
@@ -49,12 +50,10 @@ class App extends Component {
     let state = el.parentElement.parentElement.parentElement.dataset.state;
 
     this.setState({edit: {value, key, index, state}})
-    console.log("NOTED EDIT")
   }
 
   clearEdit() {
     this.setState({edit: {}});
-    console.log("CLEARED EDIT")
   }
 
   saveEdit(e){
@@ -71,12 +70,10 @@ class App extends Component {
 
   updateEditVal(e){
     e.stopPropagation();
-    console.log(e);
     let val = e.target.value;
     let edit = this.state.edit
     edit.value = val
     this.setState({edit: edit});
-    console.log("UPDATED EDIT VALUE")
   }
 
   elementToEdit(name, index, key) {
@@ -87,13 +84,15 @@ class App extends Component {
   render() {
     return (
       <div className="App" onClick={this.saveEdit}>
-        <Name data={this.state.name} editTools={this.editTools}/>
-        <ProfilePic url={this.state.imgUrl}/>
-        <Description data={this.state.description} editTools={this.editTools}/>
-        <Contacts data={this.state.contacts} editTools={this.editTools}/>
-        <Education data={this.state.education} editTools={this.editTools}/>
-        <Jobs data={this.state.jobs} editTools={this.editTools}/>
-        <Skills data={this.state.skills} editTools={this.editTools}/>
+        <div className="paper">
+          <Name data={this.state.name} editTools={this.editTools} />
+          <ProfilePic url={this.state.imgUrl} />
+          <Description data={this.state.description} editTools={this.editTools} />
+          <Contacts data={this.state.contacts} editTools={this.editTools} />
+          <Education data={this.state.education} editTools={this.editTools} />
+          <Jobs data={this.state.jobs} editTools={this.editTools} />
+          <Skills data={this.state.skills} editTools={this.editTools} />
+        </div>
       </div>
     );
   }
