@@ -17,7 +17,7 @@ class App extends Component {
       imgUrl: "",
       description: [{intro: "I am a workaholic"}],
       contacts: [{type: "Phone", value: 123}],
-       education: [{name: "Harvard", enrollment:"2019",
+      education: [{name: "Harvard", enrollment:"2019",
                    graduation: "2020", title: "MA in BA", descr: "I learned this, that"}],
       jobs: [{employer: "Starbucks", title: "Barista",
                    graduation: "2bucks",
@@ -85,10 +85,16 @@ class App extends Component {
     return (
       <div className="App" onClick={this.saveEdit}>
         <div className="paper">
-          <Name data={this.state.name} editTools={this.editTools} />
-          <ProfilePic url={this.state.imgUrl} />
-          <Description data={this.state.description} editTools={this.editTools} />
-          <Contacts data={this.state.contacts} editTools={this.editTools} />
+          <div className="intro">
+            <Name data={this.state.name} editTools={this.editTools} />
+            <Description data={this.state.description} editTools={this.editTools} />
+          </div>
+
+          <aside>
+            <ProfilePic url={this.state.imgUrl} />
+            <Contacts data={this.state.contacts} editTools={this.editTools} />
+          </aside>
+
           <Education data={this.state.education} editTools={this.editTools} />
           <Jobs data={this.state.jobs} editTools={this.editTools} />
           <Skills data={this.state.skills} editTools={this.editTools} />
